@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 
 
@@ -279,4 +280,21 @@ public class Player : MonoBehaviour
         //adding comments here to test out github close and pull requests
 
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Secret(0,13)") {
+            Debug.Log("Collision detected");
+            SceneManager.LoadScene(1);
+        }
+
+        if (collision.gameObject.name == "Secret(0,13)" || collision.gameObject.tag == "wall")
+        {
+            Debug.Log("Collision detected");
+            
+        }
+
+    }
+
+
 }
