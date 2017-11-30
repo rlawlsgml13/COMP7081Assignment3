@@ -60,12 +60,22 @@ public class Bullet : MonoBehaviour
         {
             // 자신의 위치에서 히트 효과를 연출
             Instantiate(hitEffectPrefab, transform.position, transform.rotation);
+         
         }
 
+        if (hitCollider.gameObject.tag=="wall") {
+            Debug.Log("bullet hit wall");
+        }
+      
+
+         
+        
         // 이 GameObject를 Hierarchy에서 삭제
         Destroy(gameObject);
     }
 
+
+    
 
 
 
