@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
 
 
 
-
+    AudioSource audioSource;
     public float fTimeLimit = 1f;                       //각 프리팹 생존 시간
 
     private float m_fTimeLeft = 0f;                     //남은 생존 시간

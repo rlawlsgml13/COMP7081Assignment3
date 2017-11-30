@@ -289,7 +289,7 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene(1);
         }
 
-        if (collision.gameObject.name == "Secret(0,13)" || collision.gameObject.tag == "wall")
+        if ( collision.gameObject.tag == "wall")
         {
             Debug.Log("Collision detected");
             

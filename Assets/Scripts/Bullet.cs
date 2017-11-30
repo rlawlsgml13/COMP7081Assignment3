@@ -14,8 +14,9 @@ public class Bullet : MonoBehaviour
 
 
     private static readonly float bulletMoveSpeed = 10.0f;                  //1초 동안 총알이 나아가는 거리
-
+    public float timer = 5;
     public AudioClip impact;
+    public AudioClip hit;
     public GameObject hitEffectPrefab = null;                       //닿은 효과 프리팹
 
     AudioSource audioSource;
@@ -44,7 +45,7 @@ public class Bullet : MonoBehaviour
              */
 
             //이동량, 회전량에는 Time.deltaTime을 곱해서 실행 환경(프레임률)에 따른 차이를 해결합니다
-            transform.position += ((transform.rotation * vecAddPos) * Time.deltaTime);
+           transform.position += ((transform.rotation * vecAddPos) * Time.deltaTime);
         }
     }
 
@@ -63,24 +64,48 @@ public class Bullet : MonoBehaviour
         if (null != hitEffectPrefab)
         {
             // 자신의 위치에서 히트 효과를 연출
-            Instantiate(hitEffectPrefab, transform.position, transform.rotation);
+            
+            //Instantiate(hitEffectPrefab, transform.position, transform.rotation);
          
         }
 
-        if (hitCollider.gameObject.tag=="wall") {
+     
+        if (hitCollider.gameObject.tag == "enemy")
+        {
+            Debug.Log("hit Tiger");
+            Destroy(gameObject);
+            Instantiate(hitEffectPrefab, transform.position, transform.rotation);
+            audioSource.PlayOneShot(hit, 0.7F);
+           // Destroy(gameObject);
+        }
+
+
+        // Destroy(gameObject);
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "wall")
+        {
             Debug.Log("bullet hit wall");
             audioSource.PlayOneShot(impact, 0.7F);
-        }
-      
 
-         
-        
-        // 이 GameObject를 Hierarchy에서 삭제
-        Destroy(gameObject);
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+
+                // 이 GameObject를 Hierarchy에서 삭제
+                Destroy(gameObject);
+
+            }
+            
+        }
     }
 
 
-    
+
 
 
 
