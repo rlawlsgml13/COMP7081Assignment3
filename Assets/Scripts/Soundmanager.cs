@@ -4,14 +4,44 @@ using UnityEngine;
 
 public class Soundmanager : MonoBehaviour {
     public AudioClip soundExplosion;
+    AudioSource myAudio;
 
-	// Use this for initialization
-	void Start () {
-		
+    public static Soundmanager instance;
+
+    private void Awake()
+    {
+        if (Soundmanager.instance == null) ;
+        Soundmanager.instance = this;
+    }
+    // Use this for initialization
+    void Start () {
+       
+       PlaySound();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void PlaySound()
+    {
+        
+      //  
+      //  {
+         //   myAudio = GetComponent<AudioSource>();
+         //   myAudio.PlayOneShot(soundExplosion);
+         //   Debug.Log("dd");
+
+        //  }
+
+        if (Input.GetKeyUp(KeyCode.M))
+        {
+            Debug.Log("M");
+
+        }
+    }
+
+
+    void Update()
+    {
+
+    }
 }
+	
+
