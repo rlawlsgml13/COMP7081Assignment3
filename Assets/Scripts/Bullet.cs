@@ -15,11 +15,15 @@ public class Bullet : MonoBehaviour
 
     private static readonly float bulletMoveSpeed = 10.0f;                  //1초 동안 총알이 나아가는 거리
 
-
+    public AudioClip impact;
     public GameObject hitEffectPrefab = null;                       //닿은 효과 프리팹
 
+    AudioSource audioSource;
 
-
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     /*
 	 *	매 프레임마다 호출되는 함수
@@ -65,6 +69,7 @@ public class Bullet : MonoBehaviour
 
         if (hitCollider.gameObject.tag=="wall") {
             Debug.Log("bullet hit wall");
+            audioSource.PlayOneShot(impact, 0.7F);
         }
       
 
