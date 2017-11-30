@@ -5,6 +5,7 @@ using UnityEngine;
 public class Soundmanager : MonoBehaviour {
     public AudioClip soundExplosion;
     AudioSource myAudio;
+    public int bgmOnOff = 1;
 
     public static Soundmanager instance;
 
@@ -15,32 +16,47 @@ public class Soundmanager : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-       
-       PlaySound();
-	}
+        myAudio = GetComponent<AudioSource>();
+        myAudio.PlayOneShot(soundExplosion);
+    }
 
     public void PlaySound()
     {
-        
-      //  
-      //  {
-         //   myAudio = GetComponent<AudioSource>();
-         //   myAudio.PlayOneShot(soundExplosion);
-         //   Debug.Log("dd");
 
-        //  }
+        //
+        //  
+       
+
+
+        //  
 
         if (Input.GetKeyUp(KeyCode.M))
         {
-            Debug.Log("M");
+            
+            if (bgmOnOff == 1) {
+                Debug.Log("off");
+                myAudio.GetComponent<AudioSource>().volume = 0;
+                bgmOnOff = 0;
+            } else if (bgmOnOff == 0)
+            {
+                Debug.Log("on");
+                myAudio.GetComponent<AudioSource>().volume = 1;
 
-        }
+                bgmOnOff = 1;
+            }
+
+      //      
+       //     myAudio.enabled = !myAudio.enabled;
+       //     Debug.Log("M");
+
+        } 
     }
 
 
     void Update()
     {
 
+        PlaySound();
     }
 }
 	
