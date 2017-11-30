@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 
 
@@ -36,6 +37,8 @@ public class Player : MonoBehaviour
     bool doubleTap = false;
     private Vector3 startPOS;
     private Vector3 startROT;
+
+   
 
     private void Start()
     {
@@ -190,12 +193,14 @@ public class Player : MonoBehaviour
             {
                 //전진
                 addPosition.z = MOVE_Z_FRONT;
+                Footstepmanager.insStep.StepSound();
             }
             else
             if (vecInput.z < 0)
             {
                 //후퇴
                 addPosition.z = MOVE_Z_BACK;
+                Footstepmanager.insStep.StepSound();    
             }
 
             //이동량을 Transform에 넘겨주어 이동시킨다
@@ -214,7 +219,7 @@ public class Player : MonoBehaviour
             {
                 //사격 처리
                 shootFlag = true;
-
+                Debug.Log("총알 어디");
                 //총알을 발사할 위치가 지정되어 있는지 여부를 검사
                 if (null != bulletStartPosition)
                 {
@@ -227,6 +232,7 @@ public class Player : MonoBehaviour
 
                     //총알을 생성한다
                     Instantiate(bulletObject, vecBulletPos, transform.rotation);
+                   
                 }
             }
             else
@@ -279,4 +285,25 @@ public class Player : MonoBehaviour
         //adding comments here to test out github close and pull requests
 
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Secret(0,13)") {
+            Debug.Log("Collision detected");
+            SceneManager.LoadScene(1);
+        }
+      
+           
+            if (collision.gameObject.name == "Secret(0,13)" || collision.gameObject.tag == "wall")
+            {
+                Debug.Log("Collision detected1");
+                CrashManager.insCrash.CrashSound();
+            }
+
+             
+   
+    }
+   
+  
+
 }
