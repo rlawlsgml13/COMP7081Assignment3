@@ -10,7 +10,7 @@ using System.Collections;
  */
 public class Bullet : MonoBehaviour
 {
-
+    public GameObject ScoretextView;
 
 
     private static readonly float bulletMoveSpeed = 10.0f;                  //1초 동안 총알이 나아가는 거리
@@ -60,10 +60,12 @@ public class Bullet : MonoBehaviour
         {
             // 자신의 위치에서 히트 효과를 연출
             Instantiate(hitEffectPrefab, transform.position, transform.rotation);
+            
         }
 
         // 이 GameObject를 Hierarchy에서 삭제
         Destroy(gameObject);
+
     }
 
 
