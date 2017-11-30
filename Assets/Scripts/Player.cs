@@ -190,6 +190,7 @@ public class Player : MonoBehaviour
             if (vecInput.z > 0)
             {
                 //전진
+           
                 addPosition.z = MOVE_Z_FRONT;
             }
             else
